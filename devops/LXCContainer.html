@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Linux container (LXC) - HPC Monitoring Documentation</title>
+        <title>Linux container (LXC) - DV-Lab&#x27;s Research Points</title>
         <!-- Custom HTML head -->
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
@@ -104,7 +104,7 @@
                         </button>
                     </div>
 
-                    <h1 class="menu-title">HPC Monitoring Documentation</h1>
+                    <h1 class="menu-title">DV-Lab&#x27;s Research Points</h1>
 
                     <div class="right-buttons">
                         <a href="../print.html" title="Print this book" aria-label="Print this book">
@@ -135,68 +135,6 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="linux-container-lxc"><a class="header" href="#linux-container-lxc">Linux container (LXC)</a></h1>
-<h2 id="install-lxc"><a class="header" href="#install-lxc">Install LXC</a></h2>
-<p>Full documentation about installation goes <a href="https://linuxcontainers.org/lxc/getting-started">here</a>.
-For security reasons, we create an unprivileged container as a user by these following steps:</p>
-<h3 id="init-configurations"><a class="header" href="#init-configurations">Init configurations</a></h3>
-<pre><code class="language-bash">mkdir -p ~/.config/lxc
-cp /etc/lxc/default.conf ~/.config/lxc/default.conf
-MS_UID=&quot;$(grep &quot;$(id -un)&quot; /etc/subuid  | cut -d : -f 2)&quot;
-ME_UID=&quot;$(grep &quot;$(id -un)&quot; /etc/subuid  | cut -d : -f 3)&quot;
-MS_GID=&quot;$(grep &quot;$(id -un)&quot; /etc/subgid  | cut -d : -f 2)&quot;
-ME_GID=&quot;$(grep &quot;$(id -un)&quot; /etc/subgid  | cut -d : -f 3)&quot;
-echo &quot;lxc.idmap = u 0 $MS_UID $ME_UID&quot; &gt;&gt; ~/.config/lxc/default.conf
-echo &quot;lxc.idmap = g 0 $MS_GID $ME_GID&quot; &gt;&gt; ~/.config/lxc/default.conf
-</code></pre>
-<h3 id="download-container"><a class="header" href="#download-container">Download container</a></h3>
-<p>Run this command to start download:</p>
-<pre><code class="language-bash">systemd-run --unit=hpc-unit --user --scope -p &quot;Delegate=yes&quot; -- lxc-create -t download -n hpc-container
-</code></pre>
-<p>Then, the console will print list of distibution, choose distribution <code>centos</code>, release <code>7</code> and host computer's architecture. After downloading successful, your terminal should print result like this:</p>
-<pre><code class="language-script">Downloading the image index
-
----
-DIST        RELEASE ARCH    VARIANT BUILD
----
-almalinux   8       amd64   default 20230123_23:10
-almalinux   8       arm64   default 20230123_23:14
-almalinux   8       ppc64el default 20230123_23:08
-..... Other distribution
----
-
-Distribution: 
-centos
-Release: 
-7
-Architecture: 
-amd64
-
-Downloading the image index
-Downloading the rootfs
-Downloading the metadata
-The image cache is now ready
-Unpacking the rootfs
-
----
-You just created a Centos 7 x86_64 (20230123_22:38) container.
-</code></pre>
-<h3 id="start-container"><a class="header" href="#start-container">Start container</a></h3>
-<p>Run lxc container with allocating an empty delegated cgroup:</p>
-<pre><code class="language-bash">systemd-run --unit=hpc-unit --user --scope -p &quot;Delegate=yes&quot; -- lxc-start hpc-container
-</code></pre>
-<p>To confirm its status:</p>
-<pre><code class="language-bash">lxc-info -n my-container
-lxc-ls -f
-</code></pre>
-<p>And get a shell inside it with:</p>
-<pre><code class="language-bash">lxc-attach -n hpc-container
-</code></pre>
-<p>Stopping it can be done with:</p>
-<pre><code class="language-bash">lxc-stop -n my-container
-</code></pre>
-<p>And finally removing it with:</p>
-<pre><code class="language-bash">lxc-destroy -n my-container
-</code></pre>
 
                     </main>
 
