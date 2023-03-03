@@ -1,0 +1,217 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Introduction to zk-SNARKs - DV-Lab&#x27;s Research Points</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../../introduction/index.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../../zkp/index.html"><strong aria-hidden="true">2.</strong> Zero Knowledge Proofs</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../zkp/overview.html"><strong aria-hidden="true">2.1.</strong> Overview</a></li><li class="chapter-item expanded "><a href="../../zkp/proving.html"><strong aria-hidden="true">2.2.</strong> Proving</a></li><li class="chapter-item expanded "><a href="../../zkp/snarks/index.html" class="active"><strong aria-hidden="true">2.3.</strong> Introduction to zk-SNARKs</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../zkp/snarks/bellman.html"><strong aria-hidden="true">2.3.1.</strong> Demo with zkcrypto bellman</a></li></ol></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">DV-Lab&#x27;s Research Points</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="introduction-to-zk-snarks"><a class="header" href="#introduction-to-zk-snarks">Introduction to zk-SNARKs</a></h1>
+<blockquote>
+<p>SNARK = Succinct Non-interactive ARguments of Knowledge</p>
+</blockquote>
+<blockquote>
+<p>For brief</p>
+</blockquote>
+<h2 id="zero-knowledge-proofs"><a class="header" href="#zero-knowledge-proofs">Zero-knowledge proofs</a></h2>
+<p>The goal of zero-knowledge proofs is for a verifier to be able to convince herself that a prover possesses knowledge of a secret parameter, called a witness, satisfying some relation, without revealing the witness to the verifier or anyone else.</p>
+<p>We can think of this more concretely as having a program, denoted <code>C</code> (commitment), taking two inputs: <code>C(x, w)</code>. The input <code>x</code> is the public input, and <code>w</code> is the secret witness input. The output of the program is <code>boolean</code>, i.e. either true or false. The goal then is given a specific public input x, prove that the prover knows a secret input <code>w</code> such that <code>C(x,w) == true</code>.</p>
+<p>We are specifically going to discuss <code>non-interactive zero knowledge proofs</code>, which means that the proof itself is a blob of data that can be verified without any interaction from the prover.</p>
+<h2 id="example-program"><a class="header" href="#example-program">Example program</a></h2>
+<p>Suppose Bob is given a hash <code>H</code> of some value, and he wishes to have a proof that Alice knows the value <code>s</code> that hashes to H. <strong>Normally</strong> Alice would prove this by giving <code>s</code> to Bob, after which Bob would compute the hash and check that it equals <code>H</code>.</p>
+<p>However, suppose Alice doesn’t want to reveal the value <code>s</code> to Bob but instead she just wants to prove that she knows the value. She can use a <code>zk-SNARK</code> for this.</p>
+<p>We can describe Alice’s scenario using the following program, here written as a Javascript function:</p>
+<pre><code class="language-js">function C(x, w) {
+  return ( sha256(w) == x );
+}
+</code></pre>
+<p>In other words: the program takes in a public hash <code>x</code> and a secret value <code>w</code> and returns true if the <code>SHA–256</code> hash of <code>w</code> equals <code>x</code>.</p>
+<p>Translating Alice’s problem using the <code>function C(x,w)</code> we see that Alice needs to create a <strong>proof</strong> that she possesses <code>s</code> such that <code>C(H, s) == true</code>, without having to reveal <code>s</code>. </p>
+<p>A zk-SNARK consists of three algorithms <code>G, P, V</code> defined as follows:</p>
+<p>The key generator <code>G</code> takes a secret parameter <code>lambda</code> and a program <code>C</code>, and generates two publicly available keys, a proving key <code>pk</code>, and a verification key <code>vk</code>. These keys are public parameters that only need to be generated once for a given program <code>C</code>.</p>
+<p>The prover <code>P</code> takes as input the proving key <code>pk</code>, a public input <code>x</code> and a private witness <code>w</code>. The algorithm generates a proof <code>prf = P(pk, x, w)</code> that the prover knows a witness w and that the witness satisfies the program.</p>
+<p>The verifier <code>V</code> computes <code>V(vk, x, prf)</code> which returns <code>true</code> if the proof is correct, and <code>false</code> otherwise. Thus this function returns <code>true</code> if the prover knows a witness <code>w</code> satisfying <code>C(x,w) == true</code>.</p>
+<p>Note here the secret parameter <code>lambda</code> used in the generator. This parameter sometimes makes it tricky to use <code>zk-SNARKs</code> in real-world applications. The reason for this is that anyone who knows this parameter can generate <em><strong>fake proofs</strong></em>. Specifically, given any program <code>C</code>and public input <code>x</code> a person who knows <code>lambda</code> can generate a proof <code>fake_prf</code> such that <code>V(vk, x, fake_prf)</code> evaluates to <code>true</code> without knowledge of the secret <code>w</code>.</p>
+<p>Thus actually running the generator requires a very secure process to make sure no-one learns about and saves the parameter anywhere. This was the reason for the extremely elaborate ceremony the Zcash team conducted in order to generate the proving key and verification key, while making sure the “toxic waste” parameter lambda was destroyed in the process.</p>
+<h2 id="a-zk-snark-for-our-example-program"><a class="header" href="#a-zk-snark-for-our-example-program">A zk-SNARK for our example program</a></h2>
+<p>How would Alice and Bob use a zk-SNARK in practice in order for Alice to prove that she knows the secret value in the example above?</p>
+<p>First of all, as discussed above we will use a program defined by the following function:</p>
+<pre><code class="language-js">function C(x, w) {
+  return ( sha256(w) == x );
+}
+</code></pre>
+<p>The first step is for Bob to run the generator <code>G</code> in order to create the proving key <code>pk</code> and verification key <code>vk</code>. This is done by first randomly generating <code>lambda</code> and using that as input:</p>
+<p><code>(pk, vk) = G(C, lambda)</code></p>
+<p>As discussed above, the parameter <code>lambda</code> must be handled with care, since if Alice learns the value of lambda she will be able to create *<strong>fake proofs</strong>. Bob will share <code>pk</code> and <code>vk</code> with Alice.</p>
+<p>Alice will now play the role of the prover. She needs to prove that she knows the value <code>s</code> that hashes to the known hash <code>H</code>. She runs the proving algorithm <code>P</code> using the inputs <code>pk</code>, <code>H</code> and <code>s</code> to generate the proof prf:</p>
+<pre><code class="language-js">prf = P(pk, H, s)
+</code></pre>
+<p>Next Alice presents the proof <code>prf</code> to Bob who runs the verification function <code>V(vk, H, prf)</code> which would return <code>true</code> in this case since Alice properly knew the secret <code>s</code>. Bob can be confident that Alice knew the secret, but Alice did not need to reveal the secret to Bob.</p>
+<img src="../assets/zk-snarks-flow.png" alt="zk-snarks-flow" style="width:60%; display: block; margin-left: auto;  margin-right: auto;">
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../zkp/proving.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="../../zkp/snarks/bellman.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../zkp/proving.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="../../zkp/snarks/bellman.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="../../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+    </body>
+</html>
