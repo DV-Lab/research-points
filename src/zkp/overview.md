@@ -78,7 +78,7 @@ Fortunately we have a perfect tool for this application. It’s called a digital
 
 Given a commitment scheme, we now have all the ingredients we need to run the zero knowledge protocol electronically. The Prover first encodes its vertex colorings as a set of digital messages (for example, the numbers 0, 1, 2), then generates digital commitments to each one. These commitments get sent over to the Verifier. When the Verifier challenges on an edge, the Prover simply reveals the opening values for the commitments corresponding to the two vertices.
 
-<img src="./assets/commitment-scheme.png" alt="Telecom Tower Colored" style="width:50%; display: block; margin-left: auto;  margin-right: auto;">
+<img src="./assets/commitment-scheme.png" alt="commitment-scheme" style="width:50%; display: block; margin-left: auto;  margin-right: auto;">
 
 
 So we’ve managed to eliminate the hats. But how do we prove that this protocol is **"zero knowledge"**?
@@ -98,6 +98,10 @@ We know that the protocol is complete and sound, based on our analysis above. Th
 At the same time, the protocol is also zero knowledge. To prove this, we showed that any Verifier program that succeeds in extracting information must also be able to extract information from a protocol run where rewinding is used and no information is available in the first place. Which leads to an obvious contradiction, and tells us that the protocol can’t leak information in either situation.
 
 There’s an important benefit to all this. Since it’s trivial for anyone to ‘fake’ a protocol transcript, even after Google proves to me that they have a solution, I can’t re-play a recording of the protocol transcript to prove anything to anyone else (say, a judge). That’s because the judge would have no guarantee that the video was recorded honestly, and that I didn’t simply edit in the same way Google might have done using the time machine. This means that protocol transcripts themselves contain no information. The protocol is only meaningful if I myself participated, and I can be sure that it happened in real time.
+
+
+
+# Proving section will be updated....
 
 
 [Ref](https://blog.cryptographyengineering.com/2014/11/27/zero-knowledge-proofs-illustrated-primer/)
