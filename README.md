@@ -5,7 +5,7 @@
 
 ## This repo is used to mark some research that related Web3. Now, we focus on:
 
-1. para-chain + relay-chain + substrate of Parity
+1. Para-chain + relay-chain + substrate of Parity
 2. Polkadot ecosystem
 3. Zero-Knowledge Proof
 
