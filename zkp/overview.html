@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Introduction - DV-Lab&#x27;s Research Points</title>
+        <title>Overview - DV-Lab&#x27;s Research Points</title>
         <!-- Custom HTML head -->
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
@@ -75,7 +75,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../introduction/index.html" class="active"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../zkp/index.html"><strong aria-hidden="true">2.</strong> Zero Knowledge Proofs</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../zkp/overview.html"><strong aria-hidden="true">2.1.</strong> Overview</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../introduction/index.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../zkp/index.html"><strong aria-hidden="true">2.</strong> Zero Knowledge Proofs</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../zkp/overview.html" class="active"><strong aria-hidden="true">2.1.</strong> Overview</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -134,17 +134,53 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="introduction"><a class="header" href="#introduction">Introduction</a></h1>
-<p>From a thesis in <a href="https://hcmut.edu.vn/">Ho Chi Minh University of Technology</a></p>
-<p>Hello super star :v:</p>
-<p>Hope you love this document...</p>
+                        <h1 id="overview"><a class="header" href="#overview">Overview</a></h1>
+<p>The notion of <strong>zero knowledge</strong> was first proposed in the 1980s by MIT researchers Shafi Goldwasser, Silvio Micali and Charles Rackoff. 
+That time, most work in this area focused the <strong>soundness</strong> of the proof system. It considered the case where a malicious <strong>Prover</strong> attempts to ‘trick’ a <strong>Verifier</strong> into believing a false statement: What happens if you don’t trust the Verifier?</p>
+<blockquote>
+<p><em><strong>Soundness</strong></em>: you should follow <a href="https://www.amazon.com/Logic-Computer-Science-Modelling-Reasoning/dp/052154310X">this book</a> - chapter <strong>1.4 Semantics of propositional logic</strong> (p.45, p.49)</p>
+</blockquote>
+<h3 id="the-problems"><a class="header" href="#the-problems">The problems</a></h3>
+<p>How much extra information is the Verifier going to learn during the course of this proof, thus this statement is true?</p>
+<p>Let's see an example. In most real systems (2023), when logging, the clients input their password, then the &quot;raw passwords&quot; were transmitted to the server. Servers will calculate (most, put them into hash function) passwords, then compare &quot;encoded passwords&quot; with &quot;also encoded passwords&quot; stored in database.</p>
+<p>-&gt; Why servers have privilege to know client's info, whether hackers can take advantage of this to analysis the habit of creating the clients's passwords?</p>
+<h3 id="a-real-world-example"><a class="header" href="#a-real-world-example">A &quot;real world&quot; example</a></h3>
+<p>Imagine the network structure is represented by the graph below.Each vertex in this graph represents a telecom tower. The connecting lines (edges) indicate tower's transmissions are likely to interfere with each other.</p>
+<img src="./assets/telecom-towers.png" alt="Telecom Tower" style="width:50%; display: block; margin-left: auto;  margin-right: auto;">
+<p>If adjacent towers use the same bandwidth, it can be conflicted
+So if we use three different frequency, the network will work normally. Theory problem called the graph three-coloring problem.</p>
+<img src="./assets/telecom-towers-colored.png" alt="Telecom Tower Colored" style="width:50%; display: block; margin-left: auto;  margin-right: auto;">
+<p>If this network was very large and complex, so much so that the computing power at my disposal was not sufficient to find a solution. In this instance, I might hire my friends at Google to solve it for me on spec.</p>
+<p>But this leads to a problem.</p>
+<p>Suppose that Google devotes a large percentage of their computing infrastructure to searching for a valid coloring for my graph. I’m certainly not going to pay them until I know that they really have such a coloring.</p>
+<p>At the same time, Google isn’t going to give me a copy of their solution until I’ve paid up. We’ll wind up at an impasse.</p>
+<h3 id="a-crazy-technical-solution-with-hats"><a class="header" href="#a-crazy-technical-solution-with-hats">A crazy technical solution (with hats!)</a></h3>
+<p>The solution includes some concepts:</p>
+<ol>
+<li>Google cover all tower with <strong>hats</strong>, make sure the client not have info about the color of each tower.</li>
+<li>When the client testing, Google will show randomly some towers and their colors that proved Google is not lying.</li>
+<li>The loop will be ended util step <strong>2</strong> made enough large (~ E^2), so client can be confident to pay money for Google</li>
+</ol>
+<blockquote>
+<p>Please follow <a href="https://blog.cryptographyengineering.com/2014/11/27/zero-knowledge-proofs-illustrated-primer/">main article</a> 
+for more information.</p>
+</blockquote>
+<h3 id="what-makes-it-zero-knowledge"><a class="header" href="#what-makes-it-zero-knowledge">What makes it <strong>zero knowledge</strong>?</a></h3>
+<p>The first rule of modern cryptography is never to trust people who claim such things without proof.</p>
+<p>Goldwasser, Micali and Rackoff proposed three following properties that every zero-knowledge protocol must satisfy. Stated informally, they are:</p>
+<p><strong>1. Completeness</strong>: If Google is telling the truth, then they will eventually convince me (at least with high probability).</p>
+<p><strong>2. Soundness</strong>: Google can only convince me if they’re actually telling the truth.</p>
+<p><strong>3. Zero-knowledgeness</strong>: I don’t learn anything else about Google’s solution. (hard part, we need to conduct a very strange thought experiment.)</p>
+<blockquote>
+<p><strong>Completeness</strong> and <strong>Soundness</strong>: you should follow <a href="https://www.amazon.com/Logic-Computer-Science-Modelling-Reasoning/dp/052154310X">this book</a> - chapter <strong>1.4 Semantics of propositional logic</strong> (p.45, p.49)</p>
+</blockquote>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="next" href="../zkp/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <i class="fa fa-angle-right"></i>
+                            <a rel="prev" href="../zkp/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
                             </a>
                         <div style="clear: both"></div>
                     </nav>
@@ -152,8 +188,8 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="next" href="../zkp/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa fa-angle-right"></i>
+                    <a rel="prev" href="../zkp/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
                     </a>
             </nav>
 

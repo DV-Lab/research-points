@@ -76,7 +76,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="introduction/index.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="zkp/index.html"><strong aria-hidden="true">2.</strong> Zero Knowledge Proofs</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="introduction/index.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="zkp/index.html"><strong aria-hidden="true">2.</strong> Zero Knowledge Proofs</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="zkp/overview.html"><strong aria-hidden="true">2.1.</strong> Overview</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -143,76 +143,47 @@
 <blockquote>
 <p>Main article: <a href="https://blog.cryptographyengineering.com/2014/11/27/zero-knowledge-proofs-illustrated-primer/">Zero Knowledge Proofs: An illustrated primer</a></p>
 </blockquote>
-<h2 id="the-first-rule-of-modern-cryptography-is-never-to-trust-people-who-claim-such-things-without-proof"><a class="header" href="#the-first-rule-of-modern-cryptography-is-never-to-trust-people-who-claim-such-things-without-proof">The first rule of modern cryptography is never to trust people who claim such things without proof.</a></h2>
-<h2 id="overview"><a class="header" href="#overview">Overview</a></h2>
-<p>The notion of <strong>zero knowledge</strong> was first proposed in the 1980s by MIT researchers Shafi Goldwasser, Silvio Micali and Charles Rackoff. You can find it with these keywords.</p>
-<p>That time, most work in this area focused the <strong>soundness</strong> of the proof system.</p>
-<p>It considered the case where a malicious <strong>Prover</strong> attempts to ‘trick’ a <strong>Verifier</strong> into believing a false statement: What happens if you don’t trust the Verifier?</p>
+<h2 id="the-first-rule-of-modern-cryptography-is-never-to-trust-people-who-claim-such-things-without-proof"><a class="header" href="#the-first-rule-of-modern-cryptography-is-never-to-trust-people-who-claim-such-things-without-proof">&quot;The first rule of modern cryptography is never to trust people who claim such things without proof.&quot;</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="overview"><a class="header" href="#overview">Overview</a></h1>
+<p>The notion of <strong>zero knowledge</strong> was first proposed in the 1980s by MIT researchers Shafi Goldwasser, Silvio Micali and Charles Rackoff. 
+That time, most work in this area focused the <strong>soundness</strong> of the proof system. It considered the case where a malicious <strong>Prover</strong> attempts to ‘trick’ a <strong>Verifier</strong> into believing a false statement: What happens if you don’t trust the Verifier?</p>
 <blockquote>
-<p>&quot;Soundness: Let φ1, φ2,...,φn and ψ be propositional logic formulas. If φ1, φ2,...,φn ψ is valid, then φ1, φ2,...,φn ψ holds.&quot; <a href="https://www.amazon.com/Logic-Computer-Science-Modelling-Reasoning/dp/052154310X">credit</a></p>
+<p><em><strong>Soundness</strong></em>: you should follow <a href="https://www.amazon.com/Logic-Computer-Science-Modelling-Reasoning/dp/052154310X">this book</a> - chapter <strong>1.4 Semantics of propositional logic</strong> (p.45, p.49)</p>
 </blockquote>
 <h3 id="the-problems"><a class="header" href="#the-problems">The problems</a></h3>
 <p>How much extra information is the Verifier going to learn during the course of this proof, thus this statement is true?</p>
-<p>Let's see an example. In most real systems (2023), when logging, the clients input their password, then the <strong>raw passwords</strong> were transmitted to the server. Servers will calculate (most, put them into hash function) passwords, then compare <strong>encoded passwords</strong> with <strong>also encoded passwords</strong> stored in database.</p>
-<p>-&gt; Why servers have privilege to know client's info?</p>
-<p>-&gt; With the innovation of AI, whether hackers can take advantage of this to attack servers?</p>
-<p>ZKPs can solve these problems</p>
+<p>Let's see an example. In most real systems (2023), when logging, the clients input their password, then the &quot;raw passwords&quot; were transmitted to the server. Servers will calculate (most, put them into hash function) passwords, then compare &quot;encoded passwords&quot; with &quot;also encoded passwords&quot; stored in database.</p>
+<p>-&gt; Why servers have privilege to know client's info, whether hackers can take advantage of this to analysis the habit of creating the clients's passwords?</p>
 <h3 id="a-real-world-example"><a class="header" href="#a-real-world-example">A &quot;real world&quot; example</a></h3>
-<p>Imagine the network structure is represented by the graph below.</p>
-<p>Each vertex in this graph represents a telecom tower.</p>
-<p>The connecting lines (edges) indicate tower's transmissions are likely to interfere with each other.</p>
+<p>Imagine the network structure is represented by the graph below.Each vertex in this graph represents a telecom tower. The connecting lines (edges) indicate tower's transmissions are likely to interfere with each other.</p>
 <img src="zkp/./assets/telecom-towers.png" alt="Telecom Tower" style="width:50%; display: block; margin-left: auto;  margin-right: auto;">
 <p>If adjacent towers use the same bandwidth, it can be conflicted
-So if we use three different frequency, the network will work normally.
-Theory problem called the graph three-coloring problem.</p>
+So if we use three different frequency, the network will work normally. Theory problem called the graph three-coloring problem.</p>
 <img src="zkp/./assets/telecom-towers-colored.png" alt="Telecom Tower Colored" style="width:50%; display: block; margin-left: auto;  margin-right: auto;">
 <p>If this network was very large and complex, so much so that the computing power at my disposal was not sufficient to find a solution. In this instance, I might hire my friends at Google to solve it for me on spec.</p>
 <p>But this leads to a problem.</p>
 <p>Suppose that Google devotes a large percentage of their computing infrastructure to searching for a valid coloring for my graph. I’m certainly not going to pay them until I know that they really have such a coloring.</p>
 <p>At the same time, Google isn’t going to give me a copy of their solution until I’ve paid up. We’ll wind up at an impasse.</p>
-<p>In real life there’s probably a common-sense answer to this dilemma, one that involves lawyers and escrow accounts. But this is not a blog about real life, it’s a blog about cryptography. And if you’ve ever read a crypto paper, you’ll understand that the right way to solve this problem is to dream up an absolutely crazy technical solution.</p>
 <h3 id="a-crazy-technical-solution-with-hats"><a class="header" href="#a-crazy-technical-solution-with-hats">A crazy technical solution (with hats!)</a></h3>
-<p>Summary, with the problem above. The solution includes some concepts:</p>
+<p>The solution includes some concepts:</p>
 <ol>
 <li>Google cover all tower with <strong>hats</strong>, make sure the client not have info about the color of each tower.</li>
 <li>When the client testing, Google will show randomly some towers and their colors that proved Google is not lying.</li>
 <li>The loop will be ended util step <strong>2</strong> made enough large (~ E^2), so client can be confident to pay money for Google</li>
 </ol>
 <blockquote>
-<p>Please follow <a href="https://blog.cryptographyengineering.com/2014/11/27/zero-knowledge-proofs-illustrated-primer/">main article for this solution</a> for more information. <a href="http://web.mit.edu/%7Eezyang/Public/graph/svg.html">Demo</a></p>
+<p>Please follow <a href="https://blog.cryptographyengineering.com/2014/11/27/zero-knowledge-proofs-illustrated-primer/">main article</a> 
+for more information.</p>
 </blockquote>
-<h2 id="what-makes-it-zero-knowledge"><a class="header" href="#what-makes-it-zero-knowledge">What makes it <strong>zero knowledge</strong>?</a></h2>
+<h3 id="what-makes-it-zero-knowledge"><a class="header" href="#what-makes-it-zero-knowledge">What makes it <strong>zero knowledge</strong>?</a></h3>
 <p>The first rule of modern cryptography is never to trust people who claim such things without proof.</p>
 <p>Goldwasser, Micali and Rackoff proposed three following properties that every zero-knowledge protocol must satisfy. Stated informally, they are:</p>
 <p><strong>1. Completeness</strong>: If Google is telling the truth, then they will eventually convince me (at least with high probability).</p>
 <p><strong>2. Soundness</strong>: Google can only convince me if they’re actually telling the truth.</p>
 <p><strong>3. Zero-knowledgeness</strong>: I don’t learn anything else about Google’s solution. (hard part, we need to conduct a very strange thought experiment.)</p>
 <blockquote>
-<p>If you don't know <strong>Completeness</strong> and <strong>Soundness</strong>, you should follow <a href="https://www.amazon.com/Logic-Computer-Science-Modelling-Reasoning/dp/052154310X">this book</a> - chapter <strong>1.4 Semantics of propositional logic</strong> (p.45, p.49)</p>
+<p><strong>Completeness</strong> and <strong>Soundness</strong>: you should follow <a href="https://www.amazon.com/Logic-Computer-Science-Modelling-Reasoning/dp/052154310X">this book</a> - chapter <strong>1.4 Semantics of propositional logic</strong> (p.45, p.49)</p>
 </blockquote>
-<blockquote>
-<p>Vietnamese: Completeness: &quot;Nếu nó đúng thì nó chứng minh được&quot;, Soundness: &quot;Nếu nó chứng minh được thì nó đúng&quot;</p>
-</blockquote>
-<h3 id="a-thought-experiment-with-time-machines"><a class="header" href="#a-thought-experiment-with-time-machines">A thought experiment (with time machines)</a></h3>
-<blockquote>
-<p>This prototype is turned out and have some limitations but can use to trick this problem.</p>
-</blockquote>
-<p>Since Google doesn’t actually know a valid coloring for the graph, they’ll simply color the paper with a bunch of random colors, then put the hats on. 
-If by sheer luck, I challenge them on a pair of vertices that happen to be different colors.</p>
-<p>Whenever Google finds themselves in this awkward situation, they simply fix it. That is, a designated employee pulls a switch, ‘rewinds’ time about four minutes, and the Google team recolors the graph with a completely new random solution. Now they let time roll forward and try again.</p>
-<p>In effect, the time machine allows Google to ‘repair’ any accidents that happen during their bogus protocol execution, which makes the experience look totally legitimate to me. Since bad challenge results will occur only 1/3 of the time, the expected runtime of the protocol (from Google’s perspective) is only moderately greater than the time it takes to run the honest protocol. From my perspective I don’t even know that the extra time machine trips are happening.</p>
-<p>This last point is the most important. In fact, from my perspective, being unaware that the time machine is in the picture, the resulting interaction is exactly the same as the real thing. It’s statistically identical. And yet it’s worth pointing out again that in the time machine version, Google has absolutely no information about how to color the graph.</p>
-<h3 id="what-the-hell-is-the-point-of-this"><a class="header" href="#what-the-hell-is-the-point-of-this">What the hell is the point of this?</a></h3>
-<blockquote>
-<p>Sorry, but in this section I must clone all of <strong>main article</strong>...</p>
-</blockquote>
-<p>What we’ve just shown is an example of a simulation. Note that in a world where time runs only forward and nobody can trick me with a time machine, the hat-based protocol is correct and sound, meaning that after E^2 rounds I should be convinced (with all but negligible probability) that the graph really is colorable and that Google is putting valid inputs into the protocol.</p>
-<p>What we’ve just shown is that if time doesn’t run only forward — specifically, if Google can ‘rewind’ my view of time — then they can fake a valid protocol run even if they have no information at all about the actual graph coloring.</p>
-<p>From my perspective, what’s the difference between the two protocol transcripts? When we consider the statistical distribution of the two, there’s no difference at all. Both convey exactly the same amount of useful information.</p>
-<p>Believe it or not, this proves something very important.</p>
-<p>Specifically, assume that I (the Verifier) have some strategy that ‘extracts’ useful information about Google’s coloring after observing an execution of the honest protocol. Then my strategy should work equally well in the case where I’m being fooled with a time machine. The protocol runs are, from my perspective, statistically identical. I physically cannot tell the difference.</p>
-<p>Thus if the amount of information I can extract is identical in the ‘real experiment’ and the ‘time machine experiment’, yet the amount of information Google puts into the ‘time machine’ experiment is exactly zero — then this implies that even in the real world the protocol must not leak any useful information.</p>
-<p>Thus it remains only to show that computer scientists have time machines.</p>
 
                     </main>
 
